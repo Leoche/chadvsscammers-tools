@@ -3,6 +3,7 @@ import Buffer from 'buffer'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  ssr: false,
   css: ['~/assets/css/main.css'],
   build: {
     postcss: {
@@ -12,6 +13,9 @@ export default defineNuxtConfig({
   vite: {
     define: {
       'process.env': process.env,
+    },
+    optimizeDeps: {
+      exclude: ['web3']
     }
    },
 })
