@@ -30,6 +30,7 @@ export default {
       contract.methods.estimatedRevenuesOf([this.nft_id]).call({from:'0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2'})
       .then((result) => {
         this.revenue = Math.floor(result/Math.pow(10,18));
+        this.$emit('revenueUpdate', this.revenue)
       });
 
       contract.methods.isThief(this.nft_id).call({from:'0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2'})
