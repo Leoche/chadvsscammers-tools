@@ -19,6 +19,7 @@
       <div class="text-center mt-4 bg-white/10 rounded-md p-3 backdrop-blur mt-auto">
         Total: {{total}} BAT
       </div>
+      <a href="https://github.com/Leoche/chadvsscammers-tools/" target="_blank">github for virgins</a>
       </div>
   </div>
 </template>
