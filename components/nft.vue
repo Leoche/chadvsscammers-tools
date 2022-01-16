@@ -13,7 +13,7 @@
     
 </template>
 <script>
-import contractChad from './abi.js'
+import contractChad from '../abi.js'
 import Web3 from 'web3/dist/web3.min.js'
 export default {
   props:['nft_id'],

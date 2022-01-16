@@ -26,8 +26,8 @@
   import '@/assets/css/main.css';
 </script>
 <script>
-import contractChad from './abi.js'
-import Nft from './nft.vue';
+import contractChad from '../abi.js'
+import Nft from '../components/nft.vue';
 import Web3 from 'web3/dist/web3.min.js'
 export default {
   components:{
