@@ -1,13 +1,18 @@
-import { defineNuxtConfig } from 'nuxt3'
-import Buffer from 'buffer'
+import { defineNuxtConfig } from '@nuxt/bridge'
+import { join } from 'path'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
+  target: 'static',
+  bridge: false,
   css: ['~/assets/css/main.css'],
   build: {
     postcss: {
-      postcssOptions: require('./postcss.config.js'),
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
     },
   },
   vite: {
@@ -15,7 +20,10 @@ export default defineNuxtConfig({
       'process.env': process.env,
     },
     optimizeDeps: {
-      exclude: ['web3']
+      //exclude: ['web3']
     }
    },
+   buildModules: [
+     '@nuxt/postcss8'
+   ],
 })
