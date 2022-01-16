@@ -12,9 +12,6 @@ export default defineNuxtConfig({
   vite: {
     define: {
       'process.env': process.env,
-    },
-    optimizeDeps: {
-      exclude: ['web3']
     }
    },
 })
