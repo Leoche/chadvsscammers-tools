@@ -3,8 +3,6 @@ import Buffer from 'buffer'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-  dev: true,
-  ssr: false,
   css: ['~/assets/css/main.css'],
   build: {
     postcss: {

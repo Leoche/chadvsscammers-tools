@@ -5,41 +5,35 @@ import { resolve, dirname } from 'pathe';
 import { fileURLToPath } from 'url';
 
 const assets = {
-  "/_nuxt/bootstrap-005fd7f8.mjs": {
+  "/_nuxt/bootstrap-5a3fc4cb.mjs": {
     "type": "application/javascript",
-    "etag": "\"1a3cd-3jAYWjurkM4aMT6onePeSEOorZ0\"",
-    "mtime": "2022-01-16T15:02:26.289Z",
-    "path": "../public/_nuxt/bootstrap-005fd7f8.mjs"
+    "etag": "\"16f036-ZUxfmQWHP2vUmGpgTzL+c0SpPVI\"",
+    "mtime": "2022-01-16T17:42:03.759Z",
+    "path": "../public/_nuxt/bootstrap-5a3fc4cb.mjs"
   },
-  "/_nuxt/entry-3e37597f.mjs": {
+  "/_nuxt/entry-39517e99.mjs": {
     "type": "application/javascript",
-    "etag": "\"65-yZWcYSmMfa4BNye9JJVk0feciwA\"",
-    "mtime": "2022-01-16T15:02:26.289Z",
-    "path": "../public/_nuxt/entry-3e37597f.mjs"
-  },
-  "/_nuxt/index-58110381.mjs": {
-    "type": "application/javascript",
-    "etag": "\"b4-TKfkbdyJhyu0UvME/fuXOs/TNkg\"",
-    "mtime": "2022-01-16T15:02:26.289Z",
-    "path": "../public/_nuxt/index-58110381.mjs"
+    "etag": "\"47-ICOSoha4OH13x+v5gQr6hWMUx6E\"",
+    "mtime": "2022-01-16T17:42:03.758Z",
+    "path": "../public/_nuxt/entry-39517e99.mjs"
   },
   "/_nuxt/manifest.json": {
     "type": "application/json",
-    "etag": "\"298-kbBYFqgGuF3OjrszDNRIy8WkjF0\"",
-    "mtime": "2022-01-16T15:02:26.289Z",
+    "etag": "\"20e-a0K4W6RDfalidP5raTYSdWW/FHw\"",
+    "mtime": "2022-01-16T17:42:03.758Z",
     "path": "../public/_nuxt/manifest.json"
   },
-  "/_nuxt/assets/bg.77ff15c3.jpg": {
+  "/_nuxt/assets/bg.8a0c1d48.jpg": {
     "type": "image/jpeg",
-    "etag": "\"a447c-lLk01AnU1nHAXHjnr2j2TdkOKRQ\"",
-    "mtime": "2022-01-16T15:02:26.289Z",
-    "path": "../public/_nuxt/assets/bg.77ff15c3.jpg"
+    "etag": "\"2e141-hfq6Gi5BbQ4fsE1fkMHrcJvYVE8\"",
+    "mtime": "2022-01-16T17:42:03.758Z",
+    "path": "../public/_nuxt/assets/bg.8a0c1d48.jpg"
   },
-  "/_nuxt/assets/bootstrap.18758e1c.css": {
+  "/_nuxt/assets/bootstrap.38381214.css": {
     "type": "text/css; charset=utf-8",
-    "etag": "\"156a-Z8v5z74MlqQ9wKJgSNhnLj+vQLA\"",
-    "mtime": "2022-01-16T15:02:26.289Z",
-    "path": "../public/_nuxt/assets/bootstrap.18758e1c.css"
+    "etag": "\"197c-9DGkxv+dAwAA+fR8xkE49GoprZU\"",
+    "mtime": "2022-01-16T17:42:03.758Z",
+    "path": "../public/_nuxt/assets/bootstrap.38381214.css"
   }
 };
 
@@ -56,7 +50,7 @@ function getAsset (id) {
 const METHODS = ["HEAD", "GET"];
 const PUBLIC_PATH = "/_nuxt/";
 const TWO_DAYS = 2 * 60 * 60 * 24;
-const STATIC_ASSETS_BASE = "C:/wamp64/www/chadvsscammers-tools/dist" + "/" + "1642345343";
+const STATIC_ASSETS_BASE = "C:/wamp64/www/chadvsscammers-tools/dist" + "/" + "1642354918";
 async function serveStatic(req, res) {
   if (!METHODS.includes(req.method)) {
     return;

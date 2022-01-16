@@ -537,9 +537,9 @@ var vueRouter_cjs_prod = {};
     function listen(callback) {
       listeners.push(callback);
       const teardown = () => {
-        const index2 = listeners.indexOf(callback);
-        if (index2 > -1)
-          listeners.splice(index2, 1);
+        const index = listeners.indexOf(callback);
+        if (index > -1)
+          listeners.splice(index, 1);
       };
       teardowns.push(teardown);
       return teardown;
@@ -690,9 +690,9 @@ var vueRouter_cjs_prod = {};
       listen(callback) {
         listeners.push(callback);
         return () => {
-          const index2 = listeners.indexOf(callback);
-          if (index2 > -1)
-            listeners.splice(index2, 1);
+          const index = listeners.indexOf(callback);
+          if (index > -1)
+            listeners.splice(index, 1);
         };
       },
       destroy() {
@@ -1074,7 +1074,7 @@ var vueRouter_cjs_prod = {};
     }
     return matcher;
   }
-  function createRouterMatcher(routes2, globalOptions) {
+  function createRouterMatcher(routes, globalOptions) {
     const matchers = [];
     const matcherMap = new Map();
     globalOptions = mergeOptions({ strict: false, end: true, sensitive: false }, globalOptions);
@@ -1141,9 +1141,9 @@ var vueRouter_cjs_prod = {};
           matcher.alias.forEach(removeRoute);
         }
       } else {
-        const index2 = matchers.indexOf(matcherRef);
-        if (index2 > -1) {
-          matchers.splice(index2, 1);
+        const index = matchers.indexOf(matcherRef);
+        if (index > -1) {
+          matchers.splice(index, 1);
           if (matcherRef.record.name)
             matcherMap.delete(matcherRef.record.name);
           matcherRef.children.forEach(removeRoute);
@@ -1208,7 +1208,7 @@ var vueRouter_cjs_prod = {};
         meta: mergeMetaFields(matched)
       };
     }
-    routes2.forEach((route) => addRoute(route));
+    routes.forEach((route) => addRoute(route));
     return { addRoute, resolve, removeRoute, getRoutes, getRecordMatcher };
   }
   function paramsFromLocation(params, keys) {
@@ -1473,11 +1473,11 @@ var vueRouter_cjs_prod = {};
       const currentMatched = currentRoute.matched;
       if (!routeMatched || !currentMatched.length)
         return -1;
-      const index2 = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
-      if (index2 > -1)
-        return index2;
+      const index = currentMatched.findIndex(isSameRouteRecord.bind(null, routeMatched));
+      if (index > -1)
+        return index;
       const parentRecordPath = getOriginalPath(matched[length - 2]);
-      return length > 1 && getOriginalPath(routeMatched) === parentRecordPath && currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index2;
+      return length > 1 && getOriginalPath(routeMatched) === parentRecordPath && currentMatched[currentMatched.length - 1].path !== parentRecordPath ? currentMatched.findIndex(isSameRouteRecord.bind(null, matched[length - 2])) : index;
     });
     const isActive = vue.computed(() => activeRecordIndex.value > -1 && includesParams(currentRoute.params, route.value.params));
     const isExactActive = vue.computed(() => activeRecordIndex.value > -1 && activeRecordIndex.value === currentRoute.matched.length - 1 && isSameRouteLocationParams(currentRoute.params, route.value.params));
@@ -2288,18 +2288,18 @@ var createHead = () => {
           if (tag.tag === "meta" || tag.tag === "base" || tag.tag === "script") {
             const key = getTagKey(tag.props);
             if (key) {
-              let index2 = -1;
+              let index = -1;
               for (let i = 0; i < deduped.length; i++) {
                 const prev = deduped[i];
                 const prevValue = prev.props[key.name];
                 const nextValue = tag.props[key.name];
                 if (prev.tag === tag.tag && prevValue === nextValue) {
-                  index2 = i;
+                  index = i;
                   break;
                 }
               }
-              if (index2 !== -1) {
-                deduped.splice(index2, 1);
+              if (index !== -1) {
+                deduped.splice(index, 1);
               }
             }
           }
@@ -2587,10 +2587,10 @@ function escapeHtml(string) {
   }
   let html = "";
   let escaped;
-  let index2;
+  let index;
   let lastIndex = 0;
-  for (index2 = match.index; index2 < str.length; index2++) {
-    switch (str.charCodeAt(index2)) {
+  for (index = match.index; index < str.length; index++) {
+    switch (str.charCodeAt(index)) {
       case 34:
         escaped = "&quot;";
         break;
@@ -2609,13 +2609,13 @@ function escapeHtml(string) {
       default:
         continue;
     }
-    if (lastIndex !== index2) {
-      html += str.slice(lastIndex, index2);
+    if (lastIndex !== index) {
+      html += str.slice(lastIndex, index);
     }
-    lastIndex = index2 + 1;
+    lastIndex = index + 1;
     html += escaped;
   }
-  return lastIndex !== index2 ? html + str.slice(lastIndex, index2) : html;
+  return lastIndex !== index ? html + str.slice(lastIndex, index) : html;
 }
 const commentStripRE = /^-?>|<!--|-->|--!>|<!-$/g;
 function escapeHtmlComment(src) {
@@ -3033,225 +3033,6 @@ const plugin_09cea7bc = defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component(name, Components[name]);
   }
 });
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
-const _sfc_main$4 = {
-  name: "NuxtNestedPage"
-};
-function _sfc_ssrRender$3(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  const _component_RouterView = vue_cjs_prod.resolveComponent("RouterView");
-  _push(serverRenderer.exports.ssrRenderComponent(_component_RouterView, _attrs, {
-    default: vue_cjs_prod.withCtx(({ Component }, _push2, _parent2, _scopeId) => {
-      if (_push2) {
-        serverRenderer.exports.ssrRenderVNode(_push2, vue_cjs_prod.createVNode(vue_cjs_prod.resolveDynamicComponent(Component), {
-          key: _ctx.$route.path
-        }, null), _parent2, _scopeId);
-      } else {
-        return [
-          (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.resolveDynamicComponent(Component), {
-            key: _ctx.$route.path
-          }))
-        ];
-      }
-    }),
-    _: 1
-  }, _parent));
-}
-const _sfc_setup$4 = _sfc_main$4.setup;
-_sfc_main$4.setup = (props, ctx) => {
-  const ssrContext = vue_cjs_prod.useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = new Set())).add("node_modules/nuxt3/dist/pages/runtime/nested-page.vue");
-  return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
-};
-const NuxtNestedPage = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["ssrRender", _sfc_ssrRender$3]]);
-const layouts = {};
-const NuxtLayout = vue_cjs_prod.defineComponent({
-  props: {
-    name: {
-      type: [String, Boolean],
-      default: "default"
-    }
-  },
-  setup(props, context) {
-    return () => {
-      const layout = props.name;
-      if (!layouts[layout]) {
-        return context.slots.default();
-      }
-      return vue_cjs_prod.h(layouts[layout], props, context.slots);
-    };
-  }
-});
-const _sfc_main$3 = {
-  name: "NuxtPage",
-  components: { NuxtLayout },
-  props: {
-    layout: {
-      type: String,
-      default: null
-    }
-  },
-  setup() {
-    const updatedComponentLayout = null;
-    const nuxtApp = useNuxtApp();
-    function onSuspensePending(Component) {
-      return nuxtApp.callHook("page:start", Component);
-    }
-    function onSuspenseResolved(Component) {
-      return nuxtApp.callHook("page:finish", Component);
-    }
-    return {
-      updatedComponentLayout,
-      onSuspensePending,
-      onSuspenseResolved
-    };
-  }
-};
-function _sfc_ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  const _component_RouterView = vue_cjs_prod.resolveComponent("RouterView");
-  const _component_NuxtLayout = vue_cjs_prod.resolveComponent("NuxtLayout");
-  _push(serverRenderer.exports.ssrRenderComponent(_component_RouterView, _attrs, {
-    default: vue_cjs_prod.withCtx(({ Component }, _push2, _parent2, _scopeId) => {
-      if (_push2) {
-        if (Component) {
-          _push2(serverRenderer.exports.ssrRenderComponent(_component_NuxtLayout, {
-            name: $props.layout || $setup.updatedComponentLayout || Component.type.layout
-          }, {
-            default: vue_cjs_prod.withCtx((_, _push3, _parent3, _scopeId2) => {
-              if (_push3) {
-                serverRenderer.exports.ssrRenderSuspense(_push3, {
-                  default: () => {
-                    serverRenderer.exports.ssrRenderVNode(_push3, vue_cjs_prod.createVNode(vue_cjs_prod.resolveDynamicComponent(Component), {
-                      key: _ctx.$route.path
-                    }, null), _parent3, _scopeId2);
-                  },
-                  _: 2
-                });
-              } else {
-                return [
-                  vue_cjs_prod.createVNode(vue_cjs_prod.Transition, {
-                    name: "page",
-                    mode: "out-in"
-                  }, {
-                    default: vue_cjs_prod.withCtx(() => [
-                      (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.Suspense, {
-                        onPending: () => $setup.onSuspensePending(Component),
-                        onResolve: () => $setup.onSuspenseResolved(Component)
-                      }, {
-                        default: vue_cjs_prod.withCtx(() => [
-                          (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.resolveDynamicComponent(Component), {
-                            key: _ctx.$route.path
-                          }))
-                        ]),
-                        _: 2
-                      }, 1032, ["onPending", "onResolve"]))
-                    ]),
-                    _: 2
-                  }, 1024)
-                ];
-              }
-            }),
-            _: 2
-          }, _parent2, _scopeId));
-        } else {
-          _push2(`<!---->`);
-        }
-      } else {
-        return [
-          Component ? (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(_component_NuxtLayout, {
-            key: 0,
-            name: $props.layout || $setup.updatedComponentLayout || Component.type.layout
-          }, {
-            default: vue_cjs_prod.withCtx(() => [
-              vue_cjs_prod.createVNode(vue_cjs_prod.Transition, {
-                name: "page",
-                mode: "out-in"
-              }, {
-                default: vue_cjs_prod.withCtx(() => [
-                  (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.Suspense, {
-                    onPending: () => $setup.onSuspensePending(Component),
-                    onResolve: () => $setup.onSuspenseResolved(Component)
-                  }, {
-                    default: vue_cjs_prod.withCtx(() => [
-                      (vue_cjs_prod.openBlock(), vue_cjs_prod.createBlock(vue_cjs_prod.resolveDynamicComponent(Component), {
-                        key: _ctx.$route.path
-                      }))
-                    ]),
-                    _: 2
-                  }, 1032, ["onPending", "onResolve"]))
-                ]),
-                _: 2
-              }, 1024)
-            ]),
-            _: 2
-          }, 1032, ["name"])) : vue_cjs_prod.createCommentVNode("", true)
-        ];
-      }
-    }),
-    _: 1
-  }, _parent));
-}
-const _sfc_setup$3 = _sfc_main$3.setup;
-_sfc_main$3.setup = (props, ctx) => {
-  const ssrContext = vue_cjs_prod.useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = new Set())).add("node_modules/nuxt3/dist/pages/runtime/page.vue");
-  return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
-};
-const NuxtPage = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", _sfc_ssrRender$2]]);
-const routes = [
-  {
-    "name": "index",
-    "path": "/",
-    "file": "C:/wamp64/www/chadvsscammers-tools/pages/index.vue",
-    "children": [],
-    "component": () => Promise.resolve().then(function() {
-      return index$1;
-    })
-  }
-];
-const router_0366bb3d = defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.component("NuxtNestedPage", NuxtNestedPage);
-  nuxtApp.vueApp.component("NuxtPage", NuxtPage);
-  nuxtApp.vueApp.component("NuxtLayout", NuxtLayout);
-  nuxtApp.vueApp.component("NuxtLink", vueRouter_cjs_prod.RouterLink);
-  nuxtApp.vueApp.component("NuxtChild", NuxtNestedPage);
-  const routerHistory = vueRouter_cjs_prod.createMemoryHistory();
-  const router = vueRouter_cjs_prod.createRouter({
-    history: routerHistory,
-    routes
-  });
-  nuxtApp.vueApp.use(router);
-  const previousRoute = vue_cjs_prod.shallowRef(router.currentRoute.value);
-  router.afterEach((_to, from) => {
-    previousRoute.value = from;
-  });
-  Object.defineProperty(nuxtApp.vueApp.config.globalProperties, "previousRoute", {
-    get: () => previousRoute.value
-  });
-  const route = {};
-  for (const key in router.currentRoute.value) {
-    route[key] = vue_cjs_prod.computed(() => router.currentRoute.value[key]);
-  }
-  nuxtApp._route = vue_cjs_prod.reactive(route);
-  nuxtApp.hook("app:created", async () => {
-    {
-      router.push(nuxtApp.ssrContext.url);
-    }
-    await router.isReady();
-    const is404 = router.currentRoute.value.matched.length === 0;
-    if (is404) {
-      const error = new Error(`Page not found: ${nuxtApp.ssrContext.url}`);
-      error.statusCode = 404;
-      nuxtApp.ssrContext.error = error;
-    }
-  });
-  return { provide: { router } };
-});
 const HASH_RE = /#/g;
 const AMPERSAND_RE = /&/g;
 const EQUAL_RE = /=/g;
@@ -3607,10 +3388,16 @@ const _plugins = [
   preload,
   vueuseHead_4580d82e,
   plugin_09cea7bc,
-  router_0366bb3d,
   nitroClient_37dd9d1c,
   components_515c5644
 ];
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
 const _sfc_main$2 = {
   setup() {
     const nuxtApp = useNuxtApp();
@@ -3633,43 +3420,123 @@ _sfc_main$2.setup = (props, ctx) => {
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const RootComponent = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender$1]]);
-const __default__ = {
+const contractChad = {
+  adr: "0x3b594e8001e28e676f047c4a4423f6f2cc750f41",
+  abi: [{ "inputs": [{ "internalType": "address", "name": "_game", "type": "address" }, { "internalType": "address", "name": "_bat", "type": "address" }], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "account", "type": "address" }], "name": "Paused", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "earned", "type": "uint256" }, { "indexed": false, "internalType": "bool", "name": "unstaked", "type": "bool" }], "name": "PoliceClaimed", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "earned", "type": "uint256" }, { "indexed": false, "internalType": "bool", "name": "unstaked", "type": "bool" }], "name": "ThiefClaimed", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "tokenId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }], "name": "TokenStaked", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "account", "type": "address" }], "name": "Unpaused", "type": "event" }, { "inputs": [], "name": "DAILY_bat_RATE", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "MAXIMUM_GLOBAL_bat", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "MAX_ALPHA", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "MINIMUM_TO_EXIT", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint16[]", "name": "tokenIds", "type": "uint16[]" }], "name": "addManyToBankAndPack", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "bank", "outputs": [{ "internalType": "uint16", "name": "tokenId", "type": "uint16" }, { "internalType": "uint80", "name": "value", "type": "uint80" }, { "internalType": "address", "name": "owner", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "batPerAlpha", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "bat_CLAIM_TAX_PERCENTAGE", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "canClaim", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint16[]", "name": "tokenIds", "type": "uint16[]" }, { "internalType": "bool", "name": "unstake", "type": "bool" }], "name": "claimManyFromBankAndPack", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint16[]", "name": "tokenIds", "type": "uint16[]" }], "name": "estimatedRevenuesOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "getTokensOf", "outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokenId", "type": "uint256" }], "name": "isThief", "outputs": [{ "internalType": "bool", "name": "thief", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "lastClaimTimestamp", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }, { "internalType": "address", "name": "from", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "bytes", "name": "", "type": "bytes" }], "name": "onERC721Received", "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }], "stateMutability": "pure", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "pack", "outputs": [{ "internalType": "uint16", "name": "tokenId", "type": "uint16" }, { "internalType": "uint80", "name": "value", "type": "uint80" }, { "internalType": "address", "name": "owner", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "packIndices", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "paused", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "seed", "type": "uint256" }], "name": "randomScammerOwner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256[]", "name": "tokenIds", "type": "uint256[]" }], "name": "rescue", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "rescueEnabled", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "bool", "name": "_canClaim", "type": "bool" }], "name": "setClaiming", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_nGame", "type": "address" }], "name": "setGame", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bool", "name": "_paused", "type": "bool" }], "name": "setPaused", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "bool", "name": "_enabled", "type": "bool" }], "name": "setRescueEnabled", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "rate", "type": "uint256" }, { "internalType": "uint256", "name": "exit", "type": "uint256" }], "name": "setSettings", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "totalAlphaStaked", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalThiefStaked", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalbatEarned", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "unaccountedRewards", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
+};
+const _sfc_main$1 = {
+  props: ["nft_id"],
   data() {
     return {
-      adr: "0x8fd0BF80AdDB0E3F69320e2133369F9Cfda4b4AB"
+      revenue: null,
+      isThief: null
+    };
+  },
+  mounted: async function() {
+    const web3 = new Web3("https://rpcapi.fantom.network");
+    var contract = new web3.eth.Contract(contractChad.abi, contractChad.adr);
+    contract.methods.estimatedRevenuesOf([this.nft_id]).call({ from: "0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2" }).then((result) => {
+      this.revenue = Math.floor(result / Math.pow(10, 18));
+      this.$emit("revenueUpdate", this.revenue);
+    });
+    contract.methods.isThief(this.nft_id).call({ from: "0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2" }).then((result) => {
+      this.isThief = result;
+    });
+  }
+};
+function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ class: "w-3/12 p-1 box-border" }, _attrs))}><div class="bg-white/30 rounded-md p-2 text-center">`);
+  if ($data.isThief === true) {
+    _push(`<span class="text-xs text-center text-blue-700">Chad #${serverRenderer.exports.ssrInterpolate($props.nft_id)}</span>`);
+  } else {
+    _push(`<!---->`);
+  }
+  if ($data.isThief === false) {
+    _push(`<span class="text-xs text-center text-red-700">Scammer #${serverRenderer.exports.ssrInterpolate($props.nft_id)}</span>`);
+  } else {
+    _push(`<!---->`);
+  }
+  if ($data.isThief === null) {
+    _push(`<div class="animate-pulse h-5 bg-white rounded"></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+  _push(`<div class="bg-white/80 rounded-md py-1 px-2 mt-1 text-xs">`);
+  if ($data.revenue === null) {
+    _push(`<div class="animate-pulse h-3 bg-white rounded"></div>`);
+  } else {
+    _push(`<!---->`);
+  }
+  if ($data.revenue !== null) {
+    _push(`<span>${serverRenderer.exports.ssrInterpolate($data.revenue)} BAT</span>`);
+  } else {
+    _push(`<!---->`);
+  }
+  _push(`</div></div></div>`);
+}
+const _sfc_setup$1 = _sfc_main$1.setup;
+_sfc_main$1.setup = (props, ctx) => {
+  const ssrContext = vue_cjs_prod.useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = new Set())).add("nft.vue");
+  return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+};
+const Nft = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["ssrRender", _sfc_ssrRender]]);
+const __default__ = {
+  components: {
+    Nft
+  },
+  data() {
+    return {
+      adr: "",
+      ids: [],
+      total: 0
     };
   },
   methods: {
-    check() {
-      console.log("s");
-      let amount = web3.eth.getBalance(this.adr);
-      console.log(amount);
+    async check() {
+      this.ids = [];
+      this.total = 0;
+      const web3 = new Web3("https://rpcapi.fantom.network");
+      var contract = new web3.eth.Contract(contractChad.abi, contractChad.adr);
+      contract.methods.getTokensOf(this.adr).call({ from: "0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2" }).then((result) => {
+        this.ids = result;
+      });
+    },
+    updateRevenue(revenue) {
+      this.total += revenue;
     }
   }
 };
-const _sfc_main$1 = /* @__PURE__ */ Object.assign(__default__, {
+const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
   __ssrInlineRender: true,
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({
         id: "main",
         class: "w-full h-full fixed overflow-hidden bg-black flex justify-center items-center"
-      }, _attrs))}><div class="w-8/12 h-5/6 bg-white/80 rounded-md p-6 backdrop-blur-2xl"><div class="flex items-end"><div class="w-10/12"><label class="block text-gray-700 text-sm font-bold mb-2" for="username"> FTM Address : ${serverRenderer.exports.ssrInterpolate(_ctx.adr)}</label><input${serverRenderer.exports.ssrRenderAttr("value", _ctx.adr)} class="shadow appearance-none border-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adr" type="text" placeholder="0x..."></div><div class="w-2/12 pl-1"><button class="shadow appearance-none border-none rounded w-full py-2 px-3 text-white bg-blue-500 hover:bg-blue-700 leading-tight focus:outline-none focus:shadow-outline" type="button">CHECK</button></div></div></div></div>`);
+      }, _attrs))}><div class="w-8/12 h-5/6 bg-white/50 rounded-md p-6 backdrop-blur flex flex-col"><div class="flex items-end"><div class="w-10/12"><label class="block text-gray-700 text-sm font-bold mb-2" for="username"> FTM Address : ${serverRenderer.exports.ssrInterpolate(_ctx.adr)}</label><input${serverRenderer.exports.ssrRenderAttr("value", _ctx.adr)} class="shadow appearance-none border-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="adr" type="text" placeholder="0x..."></div><div class="w-2/12 pl-1"><button class="shadow appearance-none border-none rounded w-full py-2 px-3 text-white bg-blue-500 hover:bg-blue-700 leading-tight focus:outline-none focus:shadow-outline" type="button">CHECK</button></div></div><div class="flex items-end mt-4 flex-wrap mb-auto"><!--[-->`);
+      serverRenderer.exports.ssrRenderList(_ctx.ids, (id) => {
+        _push(serverRenderer.exports.ssrRenderComponent(Nft, {
+          key: id,
+          nft_id: id
+        }, null, _parent));
+      });
+      _push(`<!--]--></div><div class="text-center mt-4 bg-white/10 rounded-md p-3 backdrop-blur mt-auto"> Total: ${serverRenderer.exports.ssrInterpolate(_ctx.total)} BAT </div></div></div>`);
     };
   }
 });
-const _sfc_setup$1 = _sfc_main$1.setup;
-_sfc_main$1.setup = (props, ctx) => {
+const _sfc_setup = _sfc_main.setup;
+_sfc_main.setup = (props, ctx) => {
   const ssrContext = vue_cjs_prod.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = new Set())).add("app.vue");
-  return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 let entry;
 const plugins = normalizePlugins(_plugins);
 {
   entry = async function createNuxtAppServer(ssrContext = {}) {
     const vueApp = vue_cjs_prod.createApp(RootComponent);
-    vueApp.component("App", _sfc_main$1);
+    vueApp.component("App", _sfc_main);
     const nuxt = createNuxtApp({ vueApp, ssrContext });
     await applyPlugins(nuxt, plugins);
     await nuxt.hooks.callHook("app:created", vueApp);
@@ -3681,22 +3548,6 @@ const bootstrap$1 = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   "default": bootstrap
-});
-const _sfc_main = {};
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  _push(`<div${serverRenderer.exports.ssrRenderAttrs(vue_cjs_prod.mergeProps({ id: "main" }, _attrs))}> sdasd </div>`);
-}
-const _sfc_setup = _sfc_main.setup;
-_sfc_main.setup = (props, ctx) => {
-  const ssrContext = vue_cjs_prod.useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = new Set())).add("pages/index.vue");
-  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
-};
-const index = /* @__PURE__ */ _export_sfc(_sfc_main, [["ssrRender", _sfc_ssrRender]]);
-const index$1 = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module",
-  "default": index
 });
 
 export { entry$1 as default };
