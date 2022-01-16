@@ -43,7 +43,6 @@ export default {
       var contract = new web3.eth.Contract(contractChad.abi, contractChad.adr);
       contract.methods.getTokensOf(this.adr).call({from: '0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2'})
       .then((result) => {
-        console.log(result)
         this.ids = result
       });
     }

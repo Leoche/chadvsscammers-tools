@@ -1,8 +1,8 @@
 <template>
     <div class="w-3/12 p-1 box-border">
     <div class="bg-white/30 rounded-md p-2 text-center">
-        <span class="text-xs text-center" v-if="isThief === true">Chad #{{nft_id}}</span>
-        <span class="text-xs text-center" v-if="isThief === false">Scammer #{{nft_id}}</span>
+        <span class="text-xs text-center text-blue-700" v-if="isThief === true">Chad #{{nft_id}}</span>
+        <span class="text-xs text-center text-red-700" v-if="isThief === false">Scammer #{{nft_id}}</span>
         <div v-if="isThief === null" class="animate-pulse h-5 bg-white rounded"></div>
         <div class="bg-white/80 rounded-md py-1 px-2 mt-1 text-xs ">
             <div v-if="revenue === null" class="animate-pulse h-3 bg-white rounded"></div>
