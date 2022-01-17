@@ -41,10 +41,17 @@ export default {
       total:0,
     }
   },
+  mounted(){
+    if(localStorage.getItem('adr_ftm_chad') && localStorage.getItem('adr_ftm_chad').length > 30) {
+      this.adr = localStorage.getItem('adr_ftm_chad');
+      this.check();
+    }
+  },
   methods:{
     async check(){
       this.ids = []
       this.total = 0
+      localStorage.setItem('adr_ftm_chad', this.adr)
       const web3 = new Web3('https://rpcapi.fantom.network')
       var contract = new web3.eth.Contract(contractChad.abi, contractChad.adr);
       contract.methods.getTokensOf(this.adr).call({from: '0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2'})
