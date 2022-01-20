@@ -2,8 +2,8 @@
     <div class="w-3/12 p-1 box-border">
     <div class="bg-white/30 rounded-md p-2 text-center">
         <div>
-          <div class="w-40 h-40 circle mx-auto animate-pulse bg-white/80 rounded-full	" v-if="isThief === null"></div>
-          <div class="w-40 h-40 circle mx-auto bg-white/80 rounded" v-if="isThief !== null">
+          <div class="w-40 h-40 mx-auto animate-pulse bg-white/80 rounded	" v-if="isThief === null"></div>
+          <div class="w-40 h-40 mx-auto bg-white/80 rounded" v-if="isThief !== null">
             <img :src="img" alt="">
           </div>
         </div>
