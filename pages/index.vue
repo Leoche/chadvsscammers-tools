@@ -13,7 +13,7 @@
           <button @click="check" class="shadow appearance-none border-none  rounded w-full py-2 px-3 text-white bg-blue-500 hover:bg-blue-700 leading-tight focus:outline-none focus:shadow-outline" type="button">CHECK</button>
         </div>
       </div>
-      <div class="flex items-end mt-4 flex-wrap  mb-auto">
+      <div class="flex items-end mt-4 flex-wrap  mb-auto overflow-y-scroll">
         <Nft v-for="id in ids" v-bind:key="id" v-bind:nft_id="id" v-on:revenueUpdate="updateRevenue"></Nft>
       </div>
       <div class="text-center mt-4 bg-white/10 rounded-md p-3 backdrop-blur mt-auto">
