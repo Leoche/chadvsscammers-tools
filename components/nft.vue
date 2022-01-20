@@ -8,7 +8,7 @@
           </div>
         </div>
         <span class="text-center text-black" v-if="isThief === true">{{name}}</span>
-        <span class="text-center text-red-700" v-if="isThief === false">{{name}}</span>
+        <span class="text-center text-red-700" v-if="isThief === false">{{name}} Alpha:{{alpha}}</span>
         <span class="text-center text-black animate-pulse" v-if="isThief === null">Loading... #{{nft_id}}</span>
         <div class="bg-white/80 rounded-md py-1 px-2 mt-1 ">
             <div v-if="revenue === null" class="animate-pulse h-3 bg-white rounded"></div>
@@ -30,6 +30,7 @@ export default {
       isThief: null,
       name:null,
       img:null,
+      alpha:null
     }
   },
   mounted: async function(){
@@ -41,17 +42,25 @@ export default {
       .then((result) => {
         this.revenue = Math.floor(result/Math.pow(10,18));
         this.$emit('revenueUpdate', this.revenue)
+      }).catch((error) => {
+        console.error(error);
       });
 
       contractNft.methods.tokenURI(this.nft_id).call({from:'0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2'})
       .then((result) => {
         let decodedResult = JSON.parse(atob(result.split(',')[1]));
-        console.log(decodedResult);
         this.name = decodedResult.name;
         this.img = decodedResult.image;
+        console.log(decodedResult)
+        for(let i in decodedResult.attributes){
+          if(decodedResult.attributes[i].trait_type == "Alpha Score"){
+            this.alpha = decodedResult.attributes[i].value
+          }
+        }
         this.isThief = decodedResult.name.includes('Chad');
+      }).catch((error) => {
+        console.error(error);
       });
-
       /* contract.methods.isThief(this.nft_id).call({from:'0x453fA7DE96528738d8C9a73c8Af54c613ba96cE2'})
       .then((result) => {
           this.isThief = result;
